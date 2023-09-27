@@ -8,17 +8,17 @@ const RepoCard = ({repo}: { repo: IRepo }) => {
 	const {addFavorite, removeFavorite} = useActions()
   const {favorites} = useAppSelector(state => state.github)
 
-  const [isFav, setisFav] = React.useState(favorites.includes(repo.html_url))
+  const [isFav, setisFav] = React.useState(favorites.includes(repo))
 
 	const addToFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		addFavorite(repo.html_url)
+		addFavorite(repo)
     setisFav(true)
 	}
 
 	const removeFromFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		removeFavorite(repo.html_url)
+		removeFavorite(repo)
     setisFav(false)
 	}
 
@@ -30,7 +30,7 @@ const RepoCard = ({repo}: { repo: IRepo }) => {
           Forks: <span className="font-bold mr-2">{repo.forks}</span>
           Watchers: <span className="font-bold">{repo.watchers}</span>
         </p>
-        <p className="text-sm font-thin">{repo?.description}</p>
+        <p className="text-sm mb-3 font-thin">{repo?.description}</p>
 
         {!isFav && <button
           className="py-2 px-4 mr-2 bg-yellow-400 rounded hover:shadow-md transition-all"

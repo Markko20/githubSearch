@@ -1,4 +1,5 @@
 import { useAppSelector } from '../hooks/redux'
+import RepoCard from '../components/RepoCard'
 
 const FavoritesPage = () => {
 	const {favorites} = useAppSelector(state => state.github)
@@ -10,10 +11,8 @@ const FavoritesPage = () => {
     <div className="flex justify-center pt-10 mx-auto h-screen w-screen">
       <ul className="list-none">
         {favorites.map((f) => (
-          <li key={f}>
-            <a href={f} target="_black">
-              {f}
-            </a>
+          <li className='w-[560px]' key={f.id}>
+            <RepoCard repo={f}/>
           </li>
         ))}
       </ul>

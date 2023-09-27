@@ -1,9 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { IRepo } from '../../models/models'
 
 const LS_FAVORITE_KEY = 'rfc'
 
 interface GithubState {
-	favorites: string[]
+	favorites: IRepo[]
 }
 
 const initialState: GithubState = {
@@ -15,13 +16,13 @@ export const githubSlice = createSlice({
 	initialState,
 	reducers: {
 
-		addFavorite: (state, action: PayloadAction<string>) => {
+		addFavorite: (state, action: PayloadAction<IRepo>) => {
 			state.favorites.push(action.payload)
 			localStorage.setItem(LS_FAVORITE_KEY, JSON.stringify(state.favorites))
 		},
 
-		removeFavorite(state, action: PayloadAction<string>) {
-			state.favorites = state.favorites.filter(f => f !== action.payload)
+		removeFavorite(state, action: PayloadAction<IRepo>) {
+			state.favorites = state.favorites.filter(f => f.id !== action.payload.id)
 			localStorage.setItem(LS_FAVORITE_KEY, JSON.stringify(state.favorites))
 		}
 	}
